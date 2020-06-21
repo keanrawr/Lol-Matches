@@ -13,4 +13,4 @@ There are two parts for the repo:
 
 ## Data gathering
 
-We'll be using the `riotwatcher` python package.
+We'll be using the `riotwatcher` python package. There are two environment values that need to be specified, `LOL_WRITE_PATH` is the path where the data should be written to, we did it this way to ensure that the code will work in both development and "production" environments. `LOL_API_KEY` is the Riot API key that we got from the developer portal.

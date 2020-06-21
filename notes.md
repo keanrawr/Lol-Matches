@@ -132,9 +132,11 @@ For this data extraction we'll be saving the output as JSON, this is just for qu
 ]
 ```
 
+# Ideas using aws
 
+Take advantage of the cloud infrastructure, here's my idea for using aws:
 
-
-# Setting up aws glue
-
-RDS security group: `default (sg-47501b1b)`
+1. s3: for saving output and logs, since it's way cheaper than mounting a large SSD
+2. EC2: To execute the code. Since data gathering will take a loooong time, it'll be good to have a free-tier machine to execute the code. Also this'll be great to actually train the model in a big machine.
+3. RDS: To have a place to save the match data outputs to, maybe postgres or maybe try redshift
+3. glue: To have an ETL to grab the data from the s3 bucket to RDS

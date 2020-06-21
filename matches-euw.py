@@ -18,8 +18,8 @@ logging.basicConfig(
     datefmt="%Y-%m-%d %H:%M:%S"
 )
 
-
-for i in range(5):
+# infinite loop
+while True:
     try:
         logging.info(f'Fetching data for match id:{match_id}')
         match = watcher.match.by_id(region, match_id)

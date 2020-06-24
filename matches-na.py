@@ -9,7 +9,7 @@ write_path = os.getenv('LOL_WRITE_PATH')
 api_key = os.getenv('LOL_API_KEY')
 watcher = LolWatcher(api_key)
 region = 'na1'
-match_id = 2868055755
+match_id = 2868127655
 
 # logging params
 log_path = os.path.join(write_path, 'logs', 'na.log')

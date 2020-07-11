@@ -9,7 +9,7 @@ write_path = os.getenv('LOL_WRITE_PATH')
 api_key = os.getenv('LOL_API_KEY')
 watcher = LolWatcher(api_key)
 region = 'na1'
-match_id = 2868127655
+match_id = 3268055750
 
 # logging params
 log_path = os.path.join(write_path, 'logs', 'na.log')
@@ -34,9 +34,9 @@ while True:
         match_stats = {**general_stats, **teams_stats, **participant_stats}
 
         # save to s3
-        json_path = os.path.join('lol', 'matches', 'na', f'{match_id}.json')
+        json_path = os.path.join('na', f'{match_id}.json')
         json_stats = json.dumps(match_stats)
-        s3.put_object(Body=json_stats, Bucket='kean-analytics', Key=json_path)
+        s3.put_object(Body=json_stats, Bucket='riot-lol-matches', Key=json_path)
         logging.info(f'Saved match data for match id:{match_id}')
     except:
         logging.error(f'Failed to fetch data for match id:{match_id}')

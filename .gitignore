@@ -6,3 +6,6 @@ data/
 *.csv
 *.txt
 *.7z
+
+.env
+.DS_Store

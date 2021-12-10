@@ -18,8 +18,9 @@ jobs:
         uses: abatilo/actions-poetry@v2.0.0
         with:
           poetry-version: ${{ matrix.poetry-version }}
-        run: poetry install
       - name: Run test
         env:
           RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
-        run: poetry run pytest -v
+        run: |
+          poetry install
+          poetry run pytest -v

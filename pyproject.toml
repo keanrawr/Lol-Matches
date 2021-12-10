@@ -5,7 +5,7 @@ description = "Python streamer for league of legends matches"
 authors = ["Kean Rawr <the.keanraw@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.7"
 riotwatcher = "^3.2.0"
 boto3 = "^1.20.21"
 

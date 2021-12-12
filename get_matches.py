@@ -41,6 +41,6 @@ def main():
     while True:
         try:
             scrape_match(match_id, scraper, s3)
-        except:
+        except Exception as e:
             logging.error(f"Couldn't scrape match: {match_id}")
         match_id += 1

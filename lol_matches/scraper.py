@@ -51,7 +51,7 @@ class MatchScraper:
                      'damageSelfMitigated', 'itemsPurchased', 'longestTimeSpentLiving', 'totalDamageDealt',
                      'totalDamageDealtToChampions', 'totalDamageShieldedOnTeammates', 'totalDamageTaken', 'totalHeal',
                      'totalHealsOnTeammates', 'totalMinionsKilled', 'doubleKills', 'tripleKills', 'quadraKills',
-                     'pentaKills', 'teamId']
+                     'pentaKills', 'teamId', 'goldEarned']
         parsed = list()
 
         for part in participants:

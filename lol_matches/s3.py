@@ -3,7 +3,6 @@ import json
 import boto3
 from traceback import print_exc
 
-from requests.models import Response
 
 class S3Helper:
     def __init__(self, bucket, lol_region: str) -> None:
@@ -45,3 +44,32 @@ class S3Helper:
             print_exc()
 
         return int(last_dataset)
+
+
+    def get_treated_dataset(self, dataset: str, version: str, format:str='.parquet', name:str=''):
+        list_params = {
+            'Bucket': self.bucket,
+            'Prefix': f'treated/{dataset}/{version}/'
+        }
+        name = dataset if name == '' else name
+
+        try:
+            paginator = self.client.get_paginator('list_objects')
+            pages = paginator.paginate(**list_params)
+
+            output = list()
+            for page in pages:
+                objects = page.get('Contents')
+                output += [obj.get('Key') for obj in objects if format in obj.get('Key')]
+
+            written = list()
+            for i, path in enumerate(output):
+                out_name = f'{name}-{i}{format}'
+                with open(out_name, 'wb') as f:
+                    self.client.download_fileobj(self.bucket, path, f)
+                written.append(out_name)
+
+        except Exception:
+            print_exc()
+
+        return written

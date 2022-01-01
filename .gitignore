@@ -1,8 +1,10 @@
 venv/
+artifacts/
 __pycache__/
 .vscode/
 data/
 
+*.env
 *.log
 *.parquet
 *.csv

@@ -1,5 +1,8 @@
 name: pytest
-on: [push]
+on:
+  push:
+    paths:
+    - 'lol_matches/**'
 
 jobs:
   test:

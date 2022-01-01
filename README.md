@@ -34,12 +34,18 @@ poetry run pytest
 
 To gather match data there's a very simplified version of a "match scraper" (using quotes, because it's not really scraping). Most of the heavy lifting is done by the `riotwatcher` python package.
 
-To use the `MatchScraper` class, you only need to set the environment variable `RIOT_API_KEY` to a valid riot API key, you can get a free 24 hour one from the [riot developer portal](https://developer.riotgames.com/).
+To use the `MatchScraper` class, you only need to set the environment variable `RIOT_API_KEY` to a valid riot API key, you can get a free 24 hour one from the [riot developer portal](https://developer.riotgames.com/), or submit a request for a long-lived key.
 
-## Data processing (WIP)
+The implementation in this repo is done in the `get_matches.py` module, currently this script runs inside a raspberry pi gathering data and saving it to an s3 bucket using the `S3Helper` class.
 
-My idea is to save the matches data to an aws s3 bucket, to later use aws tools to process the data and shape it into something like the kagle datasets.
+## Data processing
 
-## Prediction model (TODO)
+Currently three data sets are being saved to an s3 bucket: matches, teams and participants. Once the data is available in s3, databricks is used to process the raw data and save it to the s3 bucket again.
 
-Yup, we're still really far away from fitting an actual model, but hey, it's only preseason right now, so not too much pressure there.
+The data pipeline can be found in the `notebooks` directory, currently there's only one version of the dataset, but that's enough to get started.
+
+## Prediction model (WIP)
+
+So far this stage is in very early development, we're trying to accomplish a full end to end model deployment, and to acomplish it we'll be using [mlflow](https://mlflow.org/). We've setup an mlflow tracking server on aws using EC2, but that's mainly the fancy part.
+
+For modeling we've though of submitting pull requests that train a model and report on model results, this to evaluate the performance of models and make a decision on which might be the right one for the job.

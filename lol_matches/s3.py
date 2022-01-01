@@ -1,17 +1,20 @@
 import os
 import json
 import boto3
+from pathlib import Path
 from traceback import print_exc
 
 
 class S3Helper:
-    def __init__(self, bucket, lol_region: str) -> None:
+    def __init__(self, bucket, lol_region:str=None) -> None:
         self.client = boto3.client(
             's3',
             aws_access_key_id=os.getenv('S3_ACCESS_KEY'),
             aws_secret_access_key=os.getenv('S3_SECRET_ACCESS_KEY'),
         )
         self.bucket = bucket
+        if lol_region is None:
+            lol_region = 'europe'
         self.s3_root = f'landing/{lol_region}'
 
 
@@ -52,6 +55,12 @@ class S3Helper:
             'Prefix': f'treated/{dataset}/{version}/'
         }
         name = dataset if name == '' else name
+
+        # check path to name exists
+        out_path = Path(name).parts
+        if len(out_path) > 1:
+            write_dir = os.path.join(*out_path[:-1])
+            Path(write_dir).mkdir(parents=True, exist_ok=True)
 
         try:
             paginator = self.client.get_paginator('list_objects')

@@ -33,7 +33,7 @@ def main():
     logging.basicConfig(filename='log/get-matches.log', format='%(asctime)s %(levelname)s:%(message)s',
     level=logging.INFO)
     region = 'europe'
-    init_match_id = 5053413871
+    init_match_id = 5733866851
     match_id = init_match_id
 
     s3, scraper = create_objects(region)

@@ -3,14 +3,16 @@ import json
 import boto3
 from pathlib import Path
 from traceback import print_exc
+from lol_matches.settings import ScraperSettings
 
 
 class S3Helper:
     def __init__(self, bucket, lol_region:str=None) -> None:
+        settings = ScraperSettings()
         self.client = boto3.client(
             's3',
-            aws_access_key_id=os.getenv('S3_ACCESS_KEY'),
-            aws_secret_access_key=os.getenv('S3_SECRET_ACCESS_KEY'),
+            aws_access_key_id=settings.s3_access_key,
+            aws_secret_access_key=settings.s3_secret_access_key,
         )
         self.bucket = bucket
         if lol_region is None:

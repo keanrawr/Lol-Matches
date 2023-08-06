@@ -2,10 +2,13 @@ import os
 import logging
 from lol_matches.s3 import S3Helper
 from lol_matches.scraper import MatchScraper
+from lol_matches.settings import ScraperSettings
+
+settings = ScraperSettings()
 
 
 def create_objects(region):
-    bucket_name = os.getenv('S3_BUCKET_NAME')
+    bucket_name = settings.s3_bucket_name
     s3 = S3Helper(bucket_name, region)
     scraper = MatchScraper(region)
     logging.info('Instanciated scraper and s3 objects')
@@ -14,7 +17,7 @@ def create_objects(region):
 
 
 def scrape_match(match_id, scraper, s3):
-    logging.info(f'Starting scraping match: {match_id}')    
+    logging.info(f'Starting scraping match: {match_id}')
     match = scraper.get_match(match_id)
 
     logging.info(f'Parsing data for match: {match_id}')
@@ -33,7 +36,7 @@ def main():
     logging.basicConfig(filename='log/get-matches.log', format='%(asctime)s %(levelname)s:%(message)s',
     level=logging.INFO)
     region = 'europe'
-    init_match_id = 5733866851
+    init_match_id = 6510066852
     match_id = init_match_id
 
     s3, scraper = create_objects(region)

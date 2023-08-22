@@ -1,21 +1,18 @@
-import enum
-from os import getenv
 from traceback import print_exc
 from riotwatcher import LolWatcher
 from lol_matches.utils import safe_get
+from lol_matches.settings import ScraperSettings
+
+settings = ScraperSettings()
 
 class MatchScraper:
-    def __init__(self, region: str, api_key: str=None) -> None:
+    def __init__(self, region: str) -> None:
         region_prefix = {
             'europe': 'EUW1_'
         }
         self.region = region
         self.region_prefix = region_prefix.get(self.region)
-
-        if api_key is None:
-            api_key = getenv('RIOT_API_KEY')
-            assert api_key is not None, 'API key not provided, and `RIOT_API_KEY` environment variable not set'
-        self.api_key = api_key
+        self.api_key = settings.riot_api_key
 
         try:
             self.watcher = LolWatcher(self.api_key)

@@ -18,6 +18,9 @@ pydantic-settings = "^2.0.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^6.2.5"
+pytest-cov = "^4.1.0"
+tox = "^4.9.0"
+black = "^23.7.0"
 
 [tool.poetry.scripts]
 main = "get_matches:main"
@@ -25,3 +28,33 @@ main = "get_matches:main"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+
+[tool.coverage.paths]
+source = ["lol_matches"]
+
+[tool.coverage.run]
+branch = true
+source = ["lol_matches"]
+
+[tool.coverage.report]
+skip_empty = true
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py38
+skipdist = true
+
+[testenv]
+allowlist_externals =
+    poetry
+    pytest
+passenv = *
+commands =
+    pytest -rP -v --doctest-modules \
+        --junit-xml=junit/test-results.xml \
+        --cov-report=xml \
+        --cov-report=term \
+        --ignore=databricks
+"""

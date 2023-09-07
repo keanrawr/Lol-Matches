@@ -6,8 +6,9 @@ settings = ScraperSettings()
 bucket_name = settings.s3_bucket_name
 s3 = S3Helper(bucket_name)
 
+
 def test_fetch_data():
-    files = s3.get_treated_dataset('test', 'v0', '.txt')
+    files = s3.get_treated_dataset("test", "v0", ".txt")
     exist = [os.path.isfile(file) for file in files]
 
     assert all(e for e in exist)
@@ -17,7 +18,7 @@ def test_fetch_data():
 
 
 def test_fetch_data_dir():
-    files = s3.get_treated_dataset('test', 'v0', '.txt', name='data/out/train')
+    files = s3.get_treated_dataset("test", "v0", ".txt", name="data/out/train")
     exist = [os.path.isfile(file) for file in files]
 
     assert all(e for e in exist)

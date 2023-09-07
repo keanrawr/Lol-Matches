@@ -1,6 +1,6 @@
 from lol_matches.scraper import MatchScraper
 
-region = 'europe'
+region = "europe"
 match_id = 6510066852
 scraper = MatchScraper(region)
 match = scraper.get_match(match_id)

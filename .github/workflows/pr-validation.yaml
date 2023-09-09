@@ -1,9 +1,5 @@
 name: PR Validation
-on:
-  pull_request:
-    paths:
-    - 'lol_matches/**'
-    - 'tests/**'
+on: [pull_request]
 
 jobs:
   test:

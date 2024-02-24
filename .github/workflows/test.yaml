@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.8"]
-        poetry-version: [1.5.1]
+        poetry-version: [1.7.1]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -30,4 +30,4 @@ jobs:
           S3_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
         run: |
           poetry install
-          poetry run pytest -v
+          poetry run tox

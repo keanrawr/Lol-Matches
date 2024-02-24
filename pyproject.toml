@@ -2,7 +2,7 @@
 name = "lol_matches"
 version = "0.1.0"
 description = "Python streamer for league of legends matches"
-authors = ["Kean Rawr <the.keanraw@gmail.com>"]
+authors = ["Kean Rawr <git@keanrawr.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
